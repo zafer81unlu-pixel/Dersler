@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İngilizce Ders Akışı</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 1.5rem; color: var(--text); }
+    .container { max-width: 900px; margin: auto; }
+    
+    /* Üst Başlık & Sekmeler */
+    header { text-align: center; margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 1rem 0; font-size: 1.6rem; }
+    .tab-nav { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .tab-btn { padding: 0.8rem 2rem; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 10px; background: #e2e8f0; color: var(--muted); cursor: pointer; transition: 0.2s; }
+    .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
+
+    .grade-content { display: none; }
+    .grade-content.active { display: block; }
+
+    /* Hafta Kartları */
+    .week-card { background: var(--card-bg); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+    .week-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--border); padding-bottom: 0.6rem; margin-bottom: 1rem; }
+    .week-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin: 0; }
+    .unit-tag { font-size: 0.9rem; font-weight: 600; color: var(--muted); background: #f8fafc; padding: 0.25rem 0.6rem; border-radius: 6px; border: 1px solid var(--border); }
+
+    /* 4 Saatlik Ders Butonları (Grid) */
+    .hours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; }
+    .hour-btn { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem 0.5rem; background: #f8fafc; border: 2px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); font-weight: 600; text-align: center; transition: all 0.2s ease; min-height: 75px; }
+    .hour-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); }
+    .hour-code { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>İngilizce Ders Portalı</h1>
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchGrade('g7')">7. Sınıf</button>
+        <button class="tab-btn" onclick="switchGrade('g8')">8. Sınıf</button>
+      </div>
+    </header>
+
+    <!-- 7. SINIF LİSTESİ -->
+    <div id="g7" class="grade-content active">
+      <div class="week-card">
+        <div class="week-header">
+          <h2 class="week-title">1. Hafta</h2>
+          <span class="unit-tag">Unit 1: Appearance & Personality</span>
+        </div>
+        <div class="hours-grid">
+          <a href="7/G7W1H1.html" class="hour-btn"><span>1. Ders</span><span class="hour-code">G7W1H1</span></a>
+          <a href="7/G7W1H2.html" class="hour-btn"><span>2. Ders</span><span class="hour-code">G7W1H2</span></a>
+          <a href="7/G7W1H3.html" class="hour-btn"><span>3. Ders</span><span class="hour-code">G7W1H3</span></a>
+          <a href="7/G7W1H4.html" class="hour-btn"><span>4. Ders</span><span class="hour-code">G7W1H4</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. SINIF LİSTESİ -->
+    <div id="g8" class="grade-content">
+      <!-- 3. Hafta -->
+      <div class="week-card">
+        <div class="week-header">
+          <h2 class="week-title">3. Hafta</h2>
+          <span class="unit-tag">Unit 1: Friendship</span>
+        </div>
+        <div class="hours-grid">
+          <a href="8/G8W3H1.html" class="hour-btn"><span>1. Ders</span><span class="hour-code">G8W3H1</span></a>
+          <a href="8/G8W3H2.html" class="hour-btn"><span>2. Ders</span><span class="hour-code">G8W3H2</span></a>
+          <a href="8/G8W3H3.html" class="hour-btn"><span>3. Ders</span><span class="hour-code">G8W3H3</span></a>
+          <a href="8/G8W3H4.html" class="hour-btn"><span>4. Ders</span><span class="hour-code">G8W3H4</span></a>
+        </div>
+      </div>
+
+      <!-- 4. Hafta -->
+      <div class="week-card">
+        <div class="week-header">
+          <h2 class="week-title">4. Hafta</h2>
+          <span class="unit-tag">Unit 2: Teen Life</span>
+        </div>
+        <div class="hours-grid">
+          <a href="8/G8W4H1.html" class="hour-btn"><span>1. Ders</span><span class="hour-code">G8W4H1</span></a>
+          <a href="8/G8W4H2.html" class="hour-btn"><span>2. Ders</span><span class="hour-code">G8W4H2</span></a>
+          <a href="8/G8W4H3.html" class="hour-btn"><span>3. Ders</span><span class="hour-code">G8W4H3</span></a>
+          <a href="8/G8W4H4.html" class="hour-btn"><span>4. Ders</span><span class="hour-code">G8W4H4</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchGrade(gradeId) {
+      document.querySelectorAll('.grade-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(gradeId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
