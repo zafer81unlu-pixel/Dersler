@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnteraktif Yemek Asistanı - Fesleğenli ve Zeytinyağlı Et Mühürleme</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f5;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --tag-bg: #e8f8f5;
+            --tag-text: #0e6251;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            padding: 20px;
+        }
+
+        .recipe-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+        }
+
+        .recipe-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .recipe-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 8px 0;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: var(--border-color);
+            border-radius: 8px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .step-counter {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step-content {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 30px 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ingredient-tag {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            border: 1px solid rgba(14, 98, 81, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, opacity 0.2s;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-prev {
+            background-color: #e2e8f0;
+            color: #475569;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background-color: #cbd5e1;
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <h1 class="recipe-title">Fesleğenli ve Zeytinyağlı Mühürlenmiş Dana Bonfile</h1>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <span class="step-counter" id="stepCounter">Adım 1 / 5</span>
+            </div>
+
+            <div class="step-content" id="stepContent">
+                <!-- Adımlar JavaScript ile yüklenecek -->
+            </div>
+
+            <div class="button-group">
+                <button class="btn-prev" id="prevBtn" onclick="changeStep(-1)" disabled>Geri</button>
+                <button class="btn-next" id="nextBtn" onclick="changeStep(1)">İlerle</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const steps = [
+            Oda sıcaklığına gelmiş <span class='ingredient-tag'>2 adet kalın kesim dana bonfile veya antrikot</span>'un her iki yüzünü havlu kâğıtla nazikçe kurula ve üzerlerine <span class='ingredient-tag'>deniz tuzu</span> ile <span class='ingredient-tag'>taze çekilmiş karabiber</span> serp.",
+            "Geniş bir döküm veya kalın tabanlı paslanmaz çelik tavanı yüksek ateşte iyice ısıt ve tavaya <span class='ingredient-tag'>1 yemek kaşığı zeytinyağı</span> ekle.",
+            "Etleri tavaya bırakıp hiç hareket ettirmeden her bir yüzünü yaklaşık <span class='ingredient-tag'>2-3 dakika</span> mühürle; son dakikada tavaya <span class='ingredient-tag'>2 diş ezilmiş sarımsak</span> ve <span class='ingredient-tag'>taze fesleğen dalları</span> at.",
+            "Mühürlenen etleri tavadan alıp bir tahta üzerinde oda sıcaklığında <span class='ingredient-tag'>5 dakika dinlendir</span>erek suyunu etin içine hapset.",
+            "Dinlenen etleri dilimleyip üzerlerine taze sızma zeytinyağı gezdirerek sıcak olarak servis yap. Afiyet olsun!"
+        ];
+
+        let currentStep = 0;
+
+        const stepContent = document.getElementById("stepContent");
+        const stepCounter = document.getElementById("stepCounter");
+        const progressBar = document.getElementById("progressBar");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        function updateRecipe() {
+            stepContent.innerHTML = steps[currentStep];
+            stepCounter.innerText = `Adım ${currentStep + 1} / ${steps.length}`;
+            progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+
+            prevBtn.disabled = currentStep === 0;
+            
+            if (currentStep === steps.length - 1) {
+                nextBtn.innerText = "Tamamla";
+            } else {
+                nextBtn.innerText = "İlerle";
+            }
+        }
+
+        function changeStep(direction) {
+            currentStep += direction;
+            if (currentStep < 0) {
+                currentStep = 0;
+            } else if (currentStep >= steps.length) {
+                currentStep = steps.length - 1;
+            }
+            updateRecipe();
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight") {
+                if (currentStep < steps.length - 1) {
+                    changeStep(1);
+                }
+            } else if (event.key === "ArrowLeft") {
+                if (currentStep > 0) {
+                    changeStep(-1);
+                }
+            }
+        });
+
+        updateRecipe();
+    </script>
+</body>
+</html>
